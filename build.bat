@@ -2,7 +2,7 @@
 
 cd firmware\build
 
-avr-gcc -Os -mmcu=attiny84a ../src/main.c
+avr-gcc -Os -mmcu=attiny84a -Werror ../src/main.c
 if errorlevel 1 goto :error_compile
 
 avr-objcopy -O ihex -j .text -j .data a.out a.hex   
