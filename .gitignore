@@ -46,3 +46,6 @@ fp-info-cache
 build
 
 .vscode
+
+# place_footprints
+place_footprints.*

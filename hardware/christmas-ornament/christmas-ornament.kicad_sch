@@ -10,6 +10,146 @@
 		(rev "1.0.0")
 	)
 	(lib_symbols
+		(symbol "Connector:Conn_01x01_Pin"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "J"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x01_Pin"
+				(at 0 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x01, script generated"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Conn_01x01_Pin_1_1"
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy 0.8636 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:Battery_Cell"
 			(pin_numbers
 				(hide yes)
@@ -1498,6 +1638,12 @@
 		(uuid "26600797-89ea-425d-b95d-ea5220868de2")
 	)
 	(junction
+		(at 176.53 73.66)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "299c250a-05c9-4baf-b4a9-0f3824ea77a1")
+	)
+	(junction
 		(at 153.67 78.74)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1566,10 +1712,6 @@
 		(uuid "1c599e5d-dbae-4b30-9c18-8e4340b0bc37")
 	)
 	(no_connect
-		(at 105.41 81.28)
-		(uuid "2c4c5b20-260f-4edb-b34e-a71b75b17ce9")
-	)
-	(no_connect
 		(at 105.41 76.2)
 		(uuid "36c7f5b4-a796-4776-b577-279b1606e1b1")
 	)
@@ -1581,13 +1723,19 @@
 		(at 105.41 96.52)
 		(uuid "76b1f286-1fd3-4708-83c9-4ca7984707b5")
 	)
-	(no_connect
-		(at 105.41 101.6)
-		(uuid "c1dadaf1-5af0-4e55-a60f-dadf3d99419b")
+	(wire
+		(pts
+			(xy 107.95 67.31) (xy 121.92 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "01be8718-c10d-4129-8242-ec43f597609c")
 	)
 	(wire
 		(pts
-			(xy 106.68 73.66) (xy 106.68 62.23)
+			(xy 106.68 73.66) (xy 106.68 55.88)
 		)
 		(stroke
 			(width 0)
@@ -1597,7 +1745,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 62.23) (xy 128.27 62.23)
+			(xy 125.73 55.88) (xy 128.27 55.88)
 		)
 		(stroke
 			(width 0)
@@ -1747,6 +1895,16 @@
 	)
 	(wire
 		(pts
+			(xy 107.95 81.28) (xy 107.95 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3411c09e-ffd1-4043-b21b-4874d3b4c249")
+	)
+	(wire
+		(pts
 			(xy 176.53 102.87) (xy 186.69 102.87)
 		)
 		(stroke
@@ -1754,6 +1912,16 @@
 			(type default)
 		)
 		(uuid "3a0f17e0-b97a-441c-8f58-e4a7dde14458")
+	)
+	(wire
+		(pts
+			(xy 90.17 111.76) (xy 93.98 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3a564b67-414a-434a-aed2-9c7506f79411")
 	)
 	(wire
 		(pts
@@ -1967,6 +2135,16 @@
 	)
 	(wire
 		(pts
+			(xy 105.41 81.28) (xy 107.95 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8c91ea8a-f949-4ddb-9abb-15ef7e1759c0")
+	)
+	(wire
+		(pts
 			(xy 153.67 88.9) (xy 153.67 91.44)
 		)
 		(stroke
@@ -2117,7 +2295,7 @@
 	)
 	(wire
 		(pts
-			(xy 106.68 62.23) (xy 115.57 62.23)
+			(xy 106.68 55.88) (xy 115.57 55.88)
 		)
 		(stroke
 			(width 0)
@@ -2319,7 +2497,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 197.612 85.09 90)
 			(hide yes)
 			(show_name no)
@@ -2401,7 +2579,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 139.192 85.09 90)
 			(hide yes)
 			(show_name no)
@@ -2483,7 +2661,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_THT:LED_D5.0mm"
 			(at 130.81 95.25 0)
 			(hide yes)
 			(show_name no)
@@ -2621,8 +2799,8 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 128.27 62.23 0)
+		(lib_id "Connector:Conn_01x01_Pin")
+		(at 99.06 111.76 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2631,10 +2809,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "3cc8c84a-a5af-41af-8c9d-2fc050751d9d")
-		(property "Reference" "#PWR07"
-			(at 128.27 68.58 0)
-			(hide yes)
+		(uuid "26f353f0-871d-4d49-86b8-026b2ee573b0")
+		(property "Reference" "J2"
+			(at 98.425 106.68 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2643,8 +2820,8 @@
 				)
 			)
 		)
-		(property "Value" "GND"
-			(at 128.27 67.31 0)
+		(property "Value" "Conn_01x01_Pin"
+			(at 98.425 109.22 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2653,8 +2830,8 @@
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 128.27 62.23 0)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 99.06 111.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2665,6 +2842,52 @@
 			)
 		)
 		(property "Datasheet" ""
+			(at 99.06 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x01, script generated"
+			(at 99.06 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e8f7ca22-923a-4f59-9d9c-b96a4144f9ff")
+		)
+		(instances
+			(project "christmas-ornament"
+				(path "/b1600c5b-5916-459a-a834-f6829818135f"
+					(reference "J2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 128.27 55.88 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3cc8c84a-a5af-41af-8c9d-2fc050751d9d")
+		(property "Reference" "#PWR07"
 			(at 128.27 62.23 0)
 			(hide yes)
 			(show_name no)
@@ -2675,8 +2898,40 @@
 				)
 			)
 		)
+		(property "Value" "GND"
+			(at 128.27 60.96 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 128.27 55.88 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 128.27 55.88 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 128.27 62.23 0)
+			(at 128.27 55.88 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2966,7 +3221,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 59.69 53.34 0)
 			(hide yes)
 			(show_name no)
@@ -3048,7 +3303,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 151.892 85.09 90)
 			(hide yes)
 			(show_name no)
@@ -3130,7 +3385,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 95.25 55.88 0)
 			(hide yes)
 			(show_name no)
@@ -3180,7 +3435,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 120.65 62.23 0)
+		(at 120.65 55.88 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3191,7 +3446,7 @@
 		(fields_autoplaced yes)
 		(uuid "5153c5a7-dfc9-412c-b062-471e2d1b4de2")
 		(property "Reference" "SW1"
-			(at 120.65 54.61 0)
+			(at 120.65 48.26 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3201,7 +3456,7 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 120.65 57.15 0)
+			(at 120.65 50.8 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3211,7 +3466,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 120.65 57.15 0)
+			(at 120.65 50.8 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3222,7 +3477,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 120.65 57.15 0)
+			(at 120.65 50.8 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3233,7 +3488,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 120.65 62.23 0)
+			(at 120.65 55.88 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3292,7 +3547,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_THT:LED_D5.0mm"
 			(at 186.69 95.25 0)
 			(hide yes)
 			(show_name no)
@@ -3385,7 +3640,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 184.912 85.09 90)
 			(hide yes)
 			(show_name no)
@@ -3467,7 +3722,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_THT:LED_D5.0mm"
 			(at 199.39 95.25 0)
 			(hide yes)
 			(show_name no)
@@ -3560,7 +3815,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 129.032 85.09 90)
 			(hide yes)
 			(show_name no)
@@ -3687,6 +3942,158 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:Conn_01x01_Pin")
+		(at 110.49 101.6 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "7dfec1fa-4f73-4fab-9008-c44c9b58fc7e")
+		(property "Reference" "J5"
+			(at 113.538 101.854 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x01_Pin"
+			(at 112.776 103.886 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 110.49 101.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 110.49 101.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x01, script generated"
+			(at 110.49 101.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "5353f75f-a659-463b-a0d7-68b69228a9a6")
+		)
+		(instances
+			(project "christmas-ornament"
+				(path "/b1600c5b-5916-459a-a834-f6829818135f"
+					(reference "J5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x01_Pin")
+		(at 127 67.31 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "7e0717e3-2b9f-4114-8640-16c2941e0381")
+		(property "Reference" "J4"
+			(at 129.286 67.818 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x01_Pin"
+			(at 126.365 64.77 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 127 67.31 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 127 67.31 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x01, script generated"
+			(at 127 67.31 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "fb6b0114-1da9-4c66-a774-0f411140bbf3")
+		)
+		(instances
+			(project "christmas-ornament"
+				(path "/b1600c5b-5916-459a-a834-f6829818135f"
+					(reference "J4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 163.83 85.09 0)
 		(unit 1)
@@ -3720,7 +4127,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 162.052 85.09 90)
 			(hide yes)
 			(show_name no)
@@ -3802,7 +4209,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 207.772 85.09 90)
 			(hide yes)
 			(show_name no)
@@ -3884,7 +4291,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Battery:BatteryHolder_Keystone_1060_1x2032"
 			(at 72.39 53.086 90)
 			(hide yes)
 			(show_name no)
@@ -3999,7 +4406,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_THT:LED_D5.0mm"
 			(at 176.53 95.25 0)
 			(hide yes)
 			(show_name no)
@@ -4215,6 +4622,83 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:Conn_01x01_Pin")
+		(at 181.61 73.66 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ad6e8dfe-56f7-45b5-936b-0dcb9e4375a7")
+		(property "Reference" "J3"
+			(at 180.975 68.58 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x01_Pin"
+			(at 180.975 71.12 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 181.61 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 181.61 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x01, script generated"
+			(at 181.61 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a97ab4d4-7e93-432d-b1e0-a0ab232c727d")
+		)
+		(instances
+			(project "christmas-ornament"
+				(path "/b1600c5b-5916-459a-a834-f6829818135f"
+					(reference "J3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:LED")
 		(at 209.55 95.25 90)
 		(unit 1)
@@ -4248,7 +4732,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_THT:LED_D5.0mm"
 			(at 209.55 95.25 0)
 			(hide yes)
 			(show_name no)
@@ -4308,6 +4792,83 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:Conn_01x01_Pin")
+		(at 95.25 49.53 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b4bc58cc-2c97-4eb3-a88e-5515c1a2fbd1")
+		(property "Reference" "J1"
+			(at 94.615 44.45 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x01_Pin"
+			(at 94.615 46.99 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 95.25 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 95.25 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x01, script generated"
+			(at 95.25 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "6b3419ce-87df-476e-8c85-4cf6cbd67f11")
+		)
+		(instances
+			(project "christmas-ornament"
+				(path "/b1600c5b-5916-459a-a834-f6829818135f"
+					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:LED")
 		(at 140.97 95.25 90)
 		(unit 1)
@@ -4341,7 +4902,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_THT:LED_D5.0mm"
 			(at 140.97 95.25 0)
 			(hide yes)
 			(show_name no)
@@ -4434,7 +4995,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_THT:LED_D5.0mm"
 			(at 153.67 95.25 0)
 			(hide yes)
 			(show_name no)
@@ -4724,7 +5285,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_THT:LED_D5.0mm"
 			(at 163.83 95.25 0)
 			(hide yes)
 			(show_name no)
@@ -4895,7 +5456,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 174.752 85.09 90)
 			(hide yes)
 			(show_name no)
