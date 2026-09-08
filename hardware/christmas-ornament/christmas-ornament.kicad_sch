@@ -1725,16 +1725,6 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 67.31) (xy 121.92 67.31)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "01be8718-c10d-4129-8242-ec43f597609c")
-	)
-	(wire
-		(pts
 			(xy 106.68 73.66) (xy 106.68 55.88)
 		)
 		(stroke
@@ -1915,16 +1905,6 @@
 	)
 	(wire
 		(pts
-			(xy 90.17 111.76) (xy 93.98 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3a564b67-414a-434a-aed2-9c7506f79411")
-	)
-	(wire
-		(pts
 			(xy 130.81 102.87) (xy 130.81 104.14)
 		)
 		(stroke
@@ -1952,6 +1932,16 @@
 			(type default)
 		)
 		(uuid "4132e4a4-8383-49ee-8913-e1e613ae1fac")
+	)
+	(wire
+		(pts
+			(xy 107.95 67.31) (xy 114.3 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "41745d49-e3d9-4155-b31d-039655e2e93f")
 	)
 	(wire
 		(pts
@@ -2185,6 +2175,16 @@
 	)
 	(wire
 		(pts
+			(xy 105.41 101.6) (xy 107.95 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a4dd9d2-710a-418e-b1b6-8d88ec43899d")
+	)
+	(wire
+		(pts
 			(xy 153.67 78.74) (xy 153.67 81.28)
 		)
 		(stroke
@@ -2262,6 +2262,16 @@
 			(type default)
 		)
 		(uuid "bc2561b0-75a3-447d-b9b6-9d59d29f6187")
+	)
+	(wire
+		(pts
+			(xy 90.17 49.53) (xy 92.71 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "be080d08-6f24-4910-978e-1f056060d0fc")
 	)
 	(wire
 		(pts
@@ -2800,7 +2810,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x01_Pin")
-		(at 99.06 111.76 180)
+		(at 97.79 49.53 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2808,10 +2818,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "26f353f0-871d-4d49-86b8-026b2ee573b0")
 		(property "Reference" "J2"
-			(at 98.425 106.68 0)
+			(at 97.028 46.228 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2821,7 +2830,8 @@
 			)
 		)
 		(property "Value" "Conn_01x01_Pin"
-			(at 98.425 109.22 0)
+			(at 97.155 46.99 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2831,7 +2841,7 @@
 			)
 		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
-			(at 99.06 111.76 0)
+			(at 97.79 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2842,7 +2852,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 99.06 111.76 0)
+			(at 97.79 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2853,7 +2863,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x01, script generated"
-			(at 99.06 111.76 0)
+			(at 97.79 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3119,7 +3129,6 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "4420696c-345f-42c2-901b-6359d9b1f03d")
 		(property "Reference" "#FLG01"
 			(at 90.17 47.625 0)
@@ -3133,7 +3142,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 90.17 44.45 0)
+			(at 83.312 45.72 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3465,7 +3474,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Button_Switch_SMD:SW_Push_1P1T_NO_CK_KSC6xxJ"
 			(at 120.65 50.8 0)
 			(hide yes)
 			(show_name no)
@@ -3943,7 +3952,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x01_Pin")
-		(at 110.49 101.6 180)
+		(at 119.38 67.31 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3953,7 +3962,7 @@
 		(dnp no)
 		(uuid "7dfec1fa-4f73-4fab-9008-c44c9b58fc7e")
 		(property "Reference" "J5"
-			(at 113.538 101.854 0)
+			(at 122.428 67.564 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3963,7 +3972,7 @@
 			)
 		)
 		(property "Value" "Conn_01x01_Pin"
-			(at 112.776 103.886 0)
+			(at 120.65 64.008 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3973,7 +3982,7 @@
 			)
 		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
-			(at 110.49 101.6 0)
+			(at 119.38 67.31 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3984,7 +3993,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 110.49 101.6 0)
+			(at 119.38 67.31 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3995,7 +4004,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x01, script generated"
-			(at 110.49 101.6 0)
+			(at 119.38 67.31 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4019,7 +4028,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x01_Pin")
-		(at 127 67.31 180)
+		(at 113.03 101.6 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4029,7 +4038,7 @@
 		(dnp no)
 		(uuid "7e0717e3-2b9f-4114-8640-16c2941e0381")
 		(property "Reference" "J4"
-			(at 129.286 67.818 0)
+			(at 115.316 102.108 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4039,7 +4048,7 @@
 			)
 		)
 		(property "Value" "Conn_01x01_Pin"
-			(at 126.365 64.77 0)
+			(at 112.776 104.394 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4049,7 +4058,7 @@
 			)
 		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
-			(at 127 67.31 0)
+			(at 113.03 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4060,7 +4069,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 127 67.31 0)
+			(at 113.03 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4071,7 +4080,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x01, script generated"
-			(at 127 67.31 0)
+			(at 113.03 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4793,7 +4802,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x01_Pin")
-		(at 95.25 49.53 180)
+		(at 95.25 111.76 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4801,10 +4810,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "b4bc58cc-2c97-4eb3-a88e-5515c1a2fbd1")
 		(property "Reference" "J1"
-			(at 94.615 44.45 0)
+			(at 96.266 110.49 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4813,8 +4821,8 @@
 				)
 			)
 		)
-		(property "Value" "Conn_01x01_Pin"
-			(at 94.615 46.99 0)
+		(property "Value" ""
+			(at 94.615 109.22 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4824,7 +4832,7 @@
 			)
 		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
-			(at 95.25 49.53 0)
+			(at 95.25 111.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4835,7 +4843,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 95.25 49.53 0)
+			(at 95.25 111.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4846,7 +4854,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x01, script generated"
-			(at 95.25 49.53 0)
+			(at 95.25 111.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
