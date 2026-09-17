@@ -17,7 +17,7 @@
 #define S_TO_TICK(x)  (x *  61.03515625)
 #define MS_TO_TICK(x) (x *  MS_TO_TICK_CONVERTION_FACTOR)
 
-#define N_LED ((sizeof(leds) / sizeof(leds[0])))
+#define N_LED 4
 #define SCHEDULE_SIZE ((sizeof(schedule) / sizeof(schedule[0])))
 
 #define MAX(x, y) (x > y ? x : y)
@@ -53,13 +53,13 @@ led_t leds[] = {
 };
 
 sparkle_blink_t sparke_blinks[] = {
-    { .led = &leds[0], .enabled = 0, .t = 0, .direction = 1, .delay_ms = 500 },
-    { .led = &leds[1], .enabled = 0, .t = 0, .direction = 1, .delay_ms = 900 },
-    { .led = &leds[2], .enabled = 0, .t = 0, .direction = 1, .delay_ms = 400 },
-    { .led = &leds[3], .enabled = 0, .t = 0, .direction = 1, .delay_ms = 700 }
+    { .led = &leds[0], .enabled = 0, .t = 0, .direction = 1, .delay_ms = 800 },
+    { .led = &leds[1], .enabled = 0, .t = 0, .direction = 1, .delay_ms = 800 },
+    { .led = &leds[2], .enabled = 0, .t = 0, .direction = 1, .delay_ms = 800 },
+    { .led = &leds[3], .enabled = 0, .t = 0, .direction = 1, .delay_ms = 800 }
 };
 
-u8 schedule[] = { 1, 2, 3 };
+sparkle_blink_t* possible_selection[3] = {0};
 
 u32 seedx32 = 341259264;
 u32 xorshift32()
@@ -73,22 +73,6 @@ u32 xorshift32()
 u64 get_time_ms(void)
 {
     return ticks * TICK_TO_MS_CONVERTION_FACTOR;
-}
-
-void shuffle(u8* const array, u32 n)
-{
-    if (n > 1) 
-    {
-        for (u32 i = 0; i < n - 1; i++) 
-        {
-        //   u32 j = i + rand() / (RAND_MAX / (n - i) + 1);
-        //   u8 j = i + TCCR0A / (255 / (n - i) + 1);
-          u8 j = i + xorshift32() / (UINT32_MAX / (n - i) + 1);
-          u8 t = array[j];
-          array[j] = array[i];
-          array[i] = t;
-        }
-    }
 }
 
 void setup_timer0(void)
@@ -126,6 +110,65 @@ u8 led_blink(sparkle_blink_t* const handle)
     return handle->t == 0;
 }
 
+u8 select_disabled_leds(sparkle_blink_t* const leds, const u8 size, sparkle_blink_t** out)
+{
+    u8 count = 0;
+    for (u8 i = 0; i < size; i++)
+    {
+        if (!leds[i].enabled)
+        {
+            out[count] = &leds[i];
+            count++;
+        }
+    }
+
+    return count;
+}
+
+u8 schedule_lock = 0;
+sparkle_blink_t* active_led = &sparke_blinks[0];
+u64 last_update;
+
+void sparkle_effect(void)
+{
+    if (!active_led->enabled && get_time_ms() - last_update > active_led->delay_ms)
+    {
+        active_led->enabled = 1;
+
+        const u8 num_possible_selections = select_disabled_leds(sparke_blinks, N_LED, possible_selection);
+        if (num_possible_selections > 0)
+        {
+            const u8 selected_led_idx = xorshift32() % num_possible_selections;
+            active_led = possible_selection[selected_led_idx];
+            // active_led->delay_ms = (xorshift32() % 2305) + 1050;
+            active_led->delay_ms = (xorshift32() % 1800) + 1050;
+        }
+        else
+        {
+            schedule_lock = 1;
+        }
+
+        last_update = get_time_ms();
+    }
+
+
+    for (u8 i = 0; i < N_LED; i++)
+    {
+        if(sparke_blinks[i].enabled)
+        {
+            if (led_blink(&sparke_blinks[i]))
+            {
+                sparke_blinks[i].enabled = 0;
+                if (schedule_lock)
+                {
+                    active_led = &sparke_blinks[i];
+                    schedule_lock = 0;
+                }
+            }
+        }
+    }
+}
+
 int main(void)
 {
     DDRB |= (1 << PB2);
@@ -136,58 +179,10 @@ int main(void)
 
     sei();  // enable interrupt
 
-    u64 last_update = get_time_ms();    
-    u64 last_tick = ticks;
-
-    u8 idx = 0;
-    u8 unused_led = 0;
-
-    sparke_blinks[0].enabled = 1;
-
-    // Anforderungen
-    // 1. nach dem starten einer led gibt es eine minimal zeit in der keine andere led gestartet werden darf (nie snychrone leds) 
-    // 2. es sollte vermieden werden dass manche leds zu lange nicht geblinkt haben (gute distribution)
+    last_update = get_time_ms();
     while (1)
     {
-        // all leds OFF except 1
-        // leds[0].duty_cycle = 128;
-
-        // schedule sagt wie die reihenfolge der leds ist, und jede led hat ein delay ab wann sie dann angeht 
-        if (!sparke_blinks[schedule[idx]].enabled && get_time_ms() - last_update > sparke_blinks[schedule[idx]].delay_ms)
-        {
-            sparke_blinks[schedule[idx]].enabled = 1;
-            idx++;
-            // wenn die letzte led anfängt muss der schedule neu geshuffelt werden (ohne die momentane led)
-            if (idx == 3)
-            {
-                // reshuffle schedule
-                u8 tmp = 0;
-                tmp = schedule[2];
-                schedule[2] = unused_led;
-                unused_led = tmp;
-
-                shuffle(schedule, SCHEDULE_SIZE);
-                idx = 0;
-                for (u8 i = 0; i < N_LED; i++)
-                {
-                    // sparke_blinks[i].delay_ms = 200;
-                    sparke_blinks[schedule[idx]].delay_ms = (xorshift32() / UINT32_MAX) * 500 + 40;
-                }
-            }
-
-            last_update = get_time_ms();
-        }
-
-        // 100ms -> led 1 an
-
-        for (u8 i = 0; i < N_LED; i++)
-        {
-            if(sparke_blinks[i].enabled && led_blink(&sparke_blinks[i]))
-            {
-                sparke_blinks[i].enabled = 0;
-            }
-        }
-
+        sparkle_effect();
         _delay_ms(5);
     }
 
