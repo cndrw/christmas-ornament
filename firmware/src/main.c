@@ -18,9 +18,8 @@
 #define MS_TO_TICK(x) (x *  MS_TO_TICK_CONVERTION_FACTOR)
 
 #define N_LED 4
-#define SCHEDULE_SIZE ((sizeof(schedule) / sizeof(schedule[0])))
 
-#define MAX(x, y) (x > y ? x : y)
+#define LED_EFFECT_SEMI_CYCLE_MIN_BRIGHTNESS 107
 
 typedef uint8_t     u8;
 typedef uint16_t    u16;
@@ -29,6 +28,11 @@ typedef uint64_t    u64;
 
 typedef int8_t      i8;
 typedef int16_t     i16;
+
+typedef struct {
+    void(*init)(void);
+    void(*update)(void);
+}led_effect_t;
 
 typedef struct {
     u8 pin;
@@ -60,6 +64,21 @@ sparkle_blink_t sparke_blinks[] = {
 };
 
 sparkle_blink_t* possible_selection[3] = {0};
+u8 schedule_lock = 0;
+sparkle_blink_t* active_led = &sparke_blinks[0];
+u64 last_update;
+
+void noop(void) {}
+void sparkle_effect_semi_cycle_init(void);
+void sparkle_effect_full_cycle(void);
+void sparkle_effect_semi_cycle(void);
+
+const led_effect_t led_effects[] = {
+    { .init = noop, .update = sparkle_effect_full_cycle },
+    { .init = sparkle_effect_semi_cycle_init, .update = sparkle_effect_semi_cycle }
+};
+
+u8 cur_effect = 1;
 
 u32 seedx32 = 341259264;
 u32 xorshift32()
@@ -98,16 +117,16 @@ u8 ease_in_cubic(const u8 x)
     return (u32)x * x * x / 65025;
 }
 
-u8 led_blink(sparkle_blink_t* const handle)
+u8 led_blink(sparkle_blink_t* const handle, const u8 min_value)
 {
     handle->led->value = ease_in_cubic(handle->t);
 
     if (handle->t == UINT8_MAX) handle->direction = -1;
-    if (handle->t == 0) handle->direction = 1;
+    if (handle->t == min_value) handle->direction = 1;
 
     handle->t += handle->direction;
 
-    return handle->t == 0;
+    return handle->t == min_value;
 }
 
 u8 select_disabled_leds(sparkle_blink_t* const leds, const u8 size, sparkle_blink_t** out)
@@ -125,11 +144,7 @@ u8 select_disabled_leds(sparkle_blink_t* const leds, const u8 size, sparkle_blin
     return count;
 }
 
-u8 schedule_lock = 0;
-sparkle_blink_t* active_led = &sparke_blinks[0];
-u64 last_update;
-
-void sparkle_effect(void)
+void sparkle_effect(const u8 min_brightness)
 {
     if (!active_led->enabled && get_time_ms() - last_update > active_led->delay_ms)
     {
@@ -156,7 +171,7 @@ void sparkle_effect(void)
     {
         if(sparke_blinks[i].enabled)
         {
-            if (led_blink(&sparke_blinks[i]))
+            if (led_blink(&sparke_blinks[i], min_brightness))
             {
                 sparke_blinks[i].enabled = 0;
                 if (schedule_lock)
@@ -167,6 +182,25 @@ void sparkle_effect(void)
             }
         }
     }
+}
+
+void sparkle_effect_full_cycle()
+{
+    sparkle_effect(0);
+}
+
+void sparkle_effect_semi_cycle_init()
+{
+    for (u8 i = 0; i < N_LED; i++)
+    {
+        sparke_blinks[i].t = LED_EFFECT_SEMI_CYCLE_MIN_BRIGHTNESS;
+        leds[i].value = ease_in_cubic(LED_EFFECT_SEMI_CYCLE_MIN_BRIGHTNESS);
+    }
+}
+
+void sparkle_effect_semi_cycle()
+{
+    sparkle_effect(LED_EFFECT_SEMI_CYCLE_MIN_BRIGHTNESS);
 }
 
 int main(void)
@@ -180,9 +214,11 @@ int main(void)
     sei();  // enable interrupt
 
     last_update = get_time_ms();
+    led_effects[cur_effect].init();
     while (1)
     {
-        sparkle_effect();
+        led_effects[cur_effect].update();
+        // sparkle_effect_semi_cycle();
         _delay_ms(5);
     }
 
