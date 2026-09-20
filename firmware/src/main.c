@@ -72,13 +72,15 @@ void noop(void) {}
 void sparkle_effect_semi_cycle_init(void);
 void sparkle_effect_full_cycle(void);
 void sparkle_effect_semi_cycle(void);
+void alternate_effect(void);
 
 const led_effect_t led_effects[] = {
     { .init = noop, .update = sparkle_effect_full_cycle },
-    { .init = sparkle_effect_semi_cycle_init, .update = sparkle_effect_semi_cycle }
+    { .init = sparkle_effect_semi_cycle_init, .update = sparkle_effect_semi_cycle },
+    { .init = noop, .update = alternate_effect }
 };
 
-u8 cur_effect = 1;
+u8 cur_effect = 2;
 
 u32 seedx32 = 341259264;
 u32 xorshift32()
@@ -203,6 +205,19 @@ void sparkle_effect_semi_cycle()
     sparkle_effect(LED_EFFECT_SEMI_CYCLE_MIN_BRIGHTNESS);
 }
 
+void alternate_effect(void)
+{
+    static u8 parity = 0;
+
+    for (u8 i = 0; i < N_LED; i++)
+    {
+        leds[i].value = (i % 2 == parity) * UINT8_MAX;
+    }
+
+    parity = !parity;
+    _delay_ms(600);
+}
+
 int main(void)
 {
     DDRB |= (1 << PB2);
@@ -218,7 +233,6 @@ int main(void)
     while (1)
     {
         led_effects[cur_effect].update();
-        // sparkle_effect_semi_cycle();
         _delay_ms(5);
     }
 
@@ -244,3 +258,6 @@ ISR(TIM1_COMPB_vect)
 {
     OCR1B = leds[3].value;
 }
+
+// TODO:
+// - für semi_cycle effect können die timings angepasst werden, da der zyklus kürzer ist
