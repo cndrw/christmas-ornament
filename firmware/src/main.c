@@ -218,10 +218,35 @@ void alternate_effect(void)
     _delay_ms(600);
 }
 
+void handle_mode_switching(void)
+{
+    static u64 last_update = 0;
+    static u8 cur_state = 0;
+    static u8 last_state = 0;
+    static u8 allow_btn_press = 1;
+
+    cur_state = (PINA & (1 << PA1)) == 0;
+
+    if (get_time_ms() - last_update > 400)
+    {
+        allow_btn_press = 1;
+        last_update = get_time_ms();
+    }
+
+    if (allow_btn_press && cur_state == 1 && last_state == 0)
+    {
+        cur_effect = (cur_effect + 1) % 3;
+        allow_btn_press = 0;
+    }
+
+    last_state = cur_state;
+}
+
 int main(void)
 {
     DDRB |= (1 << PB2);
     DDRA |= (1 << PA5) | (1 << PA6) | (1 << PA7);
+    PORTA |= (1 << PA1); // input pullup
 
     setup_timer0();
     setup_timer1();
@@ -232,6 +257,7 @@ int main(void)
     led_effects[cur_effect].init();
     while (1)
     {
+        handle_mode_switching();
         led_effects[cur_effect].update();
         _delay_ms(5);
     }
