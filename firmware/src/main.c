@@ -69,18 +69,21 @@ sparkle_blink_t* active_led = &sparke_blinks[0];
 u64 last_update;
 
 void noop(void) {}
+void turn_off_leds(void);
 void sparkle_effect_semi_cycle_init(void);
 void sparkle_effect_full_cycle(void);
 void sparkle_effect_semi_cycle(void);
 void alternate_effect(void);
+void build_up_effect(void);
 
 const led_effect_t led_effects[] = {
     { .init = noop, .update = sparkle_effect_full_cycle },
     { .init = sparkle_effect_semi_cycle_init, .update = sparkle_effect_semi_cycle },
-    { .init = noop, .update = alternate_effect }
+    { .init = noop, .update = alternate_effect },
+    { .init = turn_off_leds, .update = build_up_effect }
 };
 
-u8 cur_effect = 2;
+u8 cur_effect = 3;
 
 u32 seedx32 = 341259264;
 u32 xorshift32()
@@ -186,6 +189,14 @@ void sparkle_effect(const u8 min_brightness)
     }
 }
 
+void turn_off_leds(void)
+{
+    for (u8 i = 0; i < N_LED; i++)
+    {
+        leds[i].value = 0;
+    }
+} 
+
 void sparkle_effect_full_cycle()
 {
     sparkle_effect(0);
@@ -221,25 +232,86 @@ void alternate_effect(void)
 void handle_mode_switching(void)
 {
     static u64 last_update = 0;
-    static u8 cur_state = 0;
-    static u8 last_state = 0;
+    static u8 cur_btn_state = 0;
+    static u8 last_btn_state = 0;
     static u8 allow_btn_press = 1;
 
-    cur_state = (PINA & (1 << PA1)) == 0;
+    // 'cause of input pullup the button is pressed on LOW
+    cur_btn_state = (PINA & (1 << PA1)) == 0;
 
+    // TODO: is das nicht einfach ein nested if anstatt diese ulgy variable?
     if (get_time_ms() - last_update > 400)
     {
         allow_btn_press = 1;
         last_update = get_time_ms();
     }
 
-    if (allow_btn_press && cur_state == 1 && last_state == 0)
+    if (allow_btn_press && cur_btn_state == 1 && last_btn_state == 0)
     {
         cur_effect = (cur_effect + 1) % 3;
         allow_btn_press = 0;
     }
 
-    last_state = cur_state;
+    last_btn_state = cur_btn_state;
+}
+
+u8 get_lowest_value(const sparkle_blink_t* const leds, const u8 size)
+{
+    u8 lowest_value = UINT8_MAX;
+    for (u8 i = 0; i < N_LED; i++)
+    {
+        if (leds[i].t < lowest_value)
+        {
+            lowest_value = leds[i].t;
+        }
+    }
+    return lowest_value;
+}
+
+u8 get_highest_value(const sparkle_blink_t* const leds, const u8 size)
+{
+    u8 highest_value = 0;
+    for (u8 i = 0; i < N_LED; i++)
+    {
+        if (leds[i].t > highest_value)
+        {
+            highest_value = leds[i].t;
+        }
+    }
+    return highest_value;
+}
+
+void build_up_effect(void)
+{
+    static i8 direction = 1;
+
+    u8 target_value = direction == 1 ? 
+                      get_lowest_value(sparke_blinks, N_LED) : 
+                      get_highest_value(sparke_blinks, N_LED);
+
+    switch (target_value)
+    {
+        case 0: direction = 1; break;
+        case UINT8_MAX: direction = -1; break;
+    }
+
+    // 2. get all leds which have this value
+    u8 size = 0;
+    for (u8 i = 0; i < N_LED; i++)
+    {
+        if (sparke_blinks[i].t == target_value)
+        {
+            possible_selection[size] = &sparke_blinks[i];
+            size++;        
+        }
+    } 
+
+    // 3. select random from possibles
+    active_led = possible_selection[xorshift32() % size];
+    active_led->t += 15 * direction;
+    active_led->led->value = ease_in_cubic(active_led->t);
+
+    _delay_ms(150);
 }
 
 int main(void)
